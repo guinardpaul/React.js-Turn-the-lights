@@ -1,0 +1,24 @@
+{
+    "name": "turn-the-lights",
+    "version": "1.0.0",
+    "description": "Turn the lights game using React.js",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/guinardpaul/React.js-Turn-the-lights.git"
+    },
+    "author": "Paul GUINARD",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/guinardpaul/React.js-Turn-the-lights/issues"
+    },
+    "homepage": "https://github.com/guinardpaul/React.js-Turn-the-lights#readme",
+    "dependencies": {
+        "express": "^4.16.2",
+        "morgan": "^1.9.0"
+    }
+}
