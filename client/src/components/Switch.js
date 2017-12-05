@@ -10,20 +10,26 @@ class Switch extends Component {
     }
 
     handleClick() {
-        this.props.handleClick(this.props.position);
+        if (!this.props.end) {
+            this.props.handleClick(this.props.position);
+        }
     }
 
     render() {
         let carre;
-        if (this.props.switchOn) {
-            carre = <div onClick={this.handleClick} className="switch switch-on"></div>
-        } else {
-            carre = <div onClick={this.handleClick} className="switch switch-off"></div>
+        let cssClass;
+
+        if (this.props.end) {
+            cssClass = 'switch switch-on';
+        } else if (this.props.switchOn) {
+            cssClass = 'switch switch-on cursor';
+        } else if (!this.props.switchOn) {
+            cssClass = 'switch switch-off cursor'
         }
 
         return (
             <span>
-                {carre}
+                <div onClick={this.handleClick} className={cssClass}></div>
             </span>
         );
     }

@@ -42,8 +42,6 @@ class GameBoard extends Component {
         this.setState({
             board: boards[Math.floor(Math.random() * boards.length)],
             end: false
-        }, () => {
-            console.log(this.state.board);
         });
     }
 
@@ -75,7 +73,7 @@ class GameBoard extends Component {
             if (newState.hasOwnProperty(row)) {
                 for (const cell in newState[row]) {
                     if (newState[row].hasOwnProperty(cell)) {
-                        if (cell === 0) {
+                        if (newState[row][cell] === 0) {
                             gameFinished = false;
                             break;
                         }
@@ -123,7 +121,7 @@ class GameBoard extends Component {
                                     {
                                         row.map((cell, j) => {
                                             return (
-                                                <Switch key={j} position={[i, j]} switchOn={cell === 0 ? false : true} handleClick={this.handleClick} />
+                                                <Switch key={j} end={this.state.end} position={[i, j]} switchOn={cell === 0 ? false : true} handleClick={this.handleClick} />
                                             );
                                         })
                                     }
