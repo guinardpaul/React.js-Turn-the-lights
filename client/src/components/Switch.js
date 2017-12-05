@@ -9,8 +9,7 @@ class Switch extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(event) {
-        console.log(this.props.position);
+    handleClick() {
         this.props.handleClick(this.props.position);
     }
 

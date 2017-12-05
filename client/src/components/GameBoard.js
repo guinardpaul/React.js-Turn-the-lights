@@ -30,32 +30,51 @@ class GameBoard extends Component {
     constructor(props) {
         super(props);
         this.state = ({
-            board: boards[Math.floor(Math.random() * boards.length)]
+            board: [],
+            end: false
         });
-        console.log(this.state.board[1][2]);
 
         this.generateBoard = this.generateBoard.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
+    generateBoard() {
+        this.setState({
+            board: boards[Math.floor(Math.random() * boards.length)]
+        }, () => {
+            console.log(this.state.board);
+        });
+    }
+
     handleClick(position) {
         let newState = this.state.board;
-        if (newState[position[0]][position[1]] === 0) {
-            newState[position[0]][position[1]] = 1;
-        } else {
-            newState[position[0]][position[1]] = 0;
-        }
+        let toModify = [
+            [position[0], position[1]],
+            [position[0] - 1, position[1]],
+            [position[0] + 1, position[1]],
+            [position[0], position[1] - 1],
+            [position[0], position[1] + 1]
+        ];
+
+        toModify.map((value, i) => {
+            if (value[0] >= 0 && value[0] <= 4 && value[1] >= 0 && value[1] <= 4) {
+                if (newState[value[0]][value[1]] === 0) {
+                    newState[value[0]][value[1]] = 1;
+                } else {
+                    newState[value[0]][value[1]] = 0;
+                }
+            } return null;
+        });
+        // TODO: check toutes les valeurs de la grilles pour savoir quand le jeu est terminé
         this.setState({
             board: newState
         });
-        console.log(newState[position[0]][position[1]])
     }
 
-    componentDidMount() {
-    }
-
-    generateBoard() {
-
+    componentWillMount() {
+        this.setState({
+            board: boards[Math.floor(Math.random() * boards.length)]
+        });
     }
 
     render() {
@@ -63,6 +82,8 @@ class GameBoard extends Component {
 
         return (
             <div>
+                <button className="btn btn-primary" onClick={this.generateBoard}>Recommencer</button>
+                <br />
                 {
                     this.state.board.map((row, i) => {
                         let cssClass;
@@ -94,7 +115,8 @@ class GameBoard extends Component {
 }
 
 GameBoard.propTypes = {
-
+    end: PropTypes.bool,
+    board: PropTypes.array
 };
 
 export default GameBoard;
