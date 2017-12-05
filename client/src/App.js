@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Eteignez les lumières !</h1>
+          <h1 className="App-title">Allumez les lumières !</h1>
 
         </header>
         <p className="App-intro">
@@ -20,7 +20,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-
+  GameBoard: PropTypes.element
 };
 
 export default App;

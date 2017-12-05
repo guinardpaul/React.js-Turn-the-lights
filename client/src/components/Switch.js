@@ -31,7 +31,8 @@ class Switch extends Component {
 
 Switch.propTypes = {
     switchOn: PropTypes.bool,
-    carre: PropTypes.element
+    carre: PropTypes.element,
+    handleClick: PropTypes.func
 };
 
 export default Switch;

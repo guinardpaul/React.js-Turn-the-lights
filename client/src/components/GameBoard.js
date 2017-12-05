@@ -40,7 +40,8 @@ class GameBoard extends Component {
 
     generateBoard() {
         this.setState({
-            board: boards[Math.floor(Math.random() * boards.length)]
+            board: boards[Math.floor(Math.random() * boards.length)],
+            end: false
         }, () => {
             console.log(this.state.board);
         });
@@ -65,9 +66,27 @@ class GameBoard extends Component {
                 }
             } return null;
         });
-        // TODO: check toutes les valeurs de la grilles pour savoir quand le jeu est terminé
+
+        // Check les valeur de la grille jusqu'à trouvé un 0
+        // Si 0 => on continu
+        // Sinon => jeu terminé
+        let gameFinished = true;
+        for (const row in newState) {
+            if (newState.hasOwnProperty(row)) {
+                for (const cell in newState[row]) {
+                    if (newState[row].hasOwnProperty(cell)) {
+                        if (cell === 0) {
+                            gameFinished = false;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
         this.setState({
-            board: newState
+            board: newState,
+            end: gameFinished
         });
     }
 
@@ -79,6 +98,10 @@ class GameBoard extends Component {
 
     render() {
         let latestRow = '';
+        let finMsg;
+        if (this.state.end) {
+            finMsg = <h3>Vous avez gagné !</h3>
+        }
 
         return (
             <div>
@@ -109,6 +132,7 @@ class GameBoard extends Component {
                         );
                     })
                 }
+                {finMsg}
             </div>
         );
     }
@@ -116,7 +140,10 @@ class GameBoard extends Component {
 
 GameBoard.propTypes = {
     end: PropTypes.bool,
-    board: PropTypes.array
+    board: PropTypes.array,
+    handleClick: PropTypes.func,
+    generateBoard: PropTypes.func,
+    position: PropTypes.array
 };
 
 export default GameBoard;
